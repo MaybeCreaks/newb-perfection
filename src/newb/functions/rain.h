@@ -1,76 +1,64 @@
 #ifndef RAIN_H
 #define RAIN_H
 
-#include "clouds.h"
 #include "detection.h"
 #include "noise.h"
 #include "sky.h"
-#include "water.h"
 
-float nlWindblow(vec3 pos, float t){
-  vec2 p = pos.xy/(1.0+pos.z);
-  float val = sin(4.0*p.x + 2.0*p.y + 2.0*t + 3.0*p.y*p.x)*sin(p.y*2.0 + 0.2*t);
-  val += sin(p.y - p.x + 0.2*t);
-  return 0.25*val*val;
+float nlRainStreak(vec2 uv, float t) {
+  uv.x += uv.y * 0.12;
+  uv.y *= 0.08;
+  uv.y -= t * 14.0;
+
+  vec2 p = floor(uv);
+  vec2 f = fract(uv);
+
+  float n = rand(p);
+  float streak = smoothstep(0.82, 0.97, n);
+  streak *= smoothstep(0.0, 0.15, f.x) * smoothstep(1.0, 0.75, f.x);
+  streak *= smoothstep(0.0, 0.25, f.y) * smoothstep(1.0, 0.2, f.y);
+
+  return streak;
 }
 
-vec4 nlRefl(
-  inout vec4 color, nl_skycolor skycol, nl_environment env, vec3 viewDir, vec3 wPos, vec3 tiledCpos,
-  vec3 CAMERA_POS, vec3 torchColor, vec2 lit, float camDist, float renderDist, highp float t
-) {
-  vec4 wetRefl = vec4(0.0,0.0,0.0,0.0);
+vec3 nlRainParticle(vec3 p, float t, float rain) {
+  vec3 p0 = floor(p);
+  vec3 u = fract(p);
 
-  #ifndef NL_GROUND_REFL
-  if (env.rainFactor > 0.0) {
-  #endif
+  float n = rand(p0.xz + vec2(p0.y, 0.0));
+  float spark = smoothstep(0.91, 0.99, n);
 
-    float wetness = lit.y*lit.y;
+  float phase = fract(t * 3.5 + n * 6.2831);
+  spark *= smoothstep(0.0, 0.18, phase) * (1.0 - phase);
 
-    // clip reflection when far (better performance)
-    float endDist = renderDist*0.6;
-    if (camDist < endDist) {
-      float cosR = max(viewDir.y, 0.0);
-      float puddles = max(1.0 - NL_GROUND_RAIN_PUDDLES*fastRand(tiledCpos.xz), 0.0);
+  vec3 particleCol = mix(vec3(0.55, 0.72, 0.95), vec3(0.9, 0.95, 1.0), spark);
+  return particleCol * spark * rain * 1.8;
+}
 
-      #ifndef NL_GROUND_REFL
-        wetness *= puddles;
-        float reflective = wetness*env.rainFactor*NL_GROUND_RAIN_WETNESS;
-      #else
-        float reflective = NL_GROUND_REFL;
-        if (!env.end && !env.nether) {
-          // only multiply with wetness in overworld
-          reflective *= wetness;
-        } 
-
-        wetness *= puddles;
-        reflective = mix(reflective, wetness, env.rainFactor);
-      #endif
-
-      if (wPos.y < 0.0) {
-        viewDir.y = -viewDir.y;
-        wetRefl.rgb = nlRenderSky(skycol, env, viewDir, t, false);
-
-        #ifdef NL_CLOUD_AURORA_REFLECTION
-          vec4 cloudRefl = nlCloudAuroraReflection(skycol, env, viewDir, wPos, CAMERA_POS, t);
-          wetRefl.rgb = mix(wetRefl.rgb, cloudRefl.rgb, cloudRefl.a);
-        #endif
-
-        // torch light
-        wetRefl.rgb += torchColor*lit.x*NL_TORCHLIGHT_INTENSITY;
-
-        wetRefl.a = calculateFresnel(cosR, 0.03)*reflective;
-        wetRefl.a *= clamp(2.0-2.0*camDist/endDist, 0.0, 1.0); // fade out before clip
-      }
-    }
-
-    // darken wet parts
-    color.rgb *= 1.0 - 0.4*wetness*env.rainFactor;
-
-  #ifndef NL_GROUND_REFL
+vec4 nlRenderRain(vec3 pos, float t, float rain, vec3 fogCol) {
+  if (rain <= 0.001) {
+    return vec4(0.0);
   }
-  #endif
 
-  return wetRefl;
+  vec2 uv = pos.xz + pos.y * 0.08;
+  float streaks = nlRainStreak(uv * 7.5, t);
+  streaks += 0.5 * nlRainStreak(uv * 15.0 + vec2(1.3, 2.7), t * 1.25);
+
+  vec3 particleGlow = nlRainParticle(pos * 4.0, t, rain);
+  vec3 col = mix(fogCol, vec3(0.82, 0.91, 1.0), 0.55) + particleGlow;
+
+  float alpha = streaks * rain * 0.42 + length(particleGlow) * 0.3;
+
+  return vec4(col, clamp(alpha, 0.0, 0.85));
+}
+
+vec3 nlWetnessReflection(vec3 color, float wetness, vec3 skyCol, float lightMask) {
+  if (wetness <= 0.001) {
+    return color;
+  }
+  vec3 wetCol = color * 0.65;
+  wetCol += skyCol * wetness * lightMask * 0.40;
+  return mix(color, wetCol, wetness);
 }
 
 #endif
