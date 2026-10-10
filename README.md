@@ -1,6 +1,6 @@
-# Newb X Legacy
+# Newb Perfection
 
-**Newb X Legacy** is a RenderDragon successor to the legacy GLSL shader, [Newb Shader](https://github.com/devendrn/newb-shader-mcbe). It is an enhanced vanilla shader that focuses on being lightweight and having soft aesthetics. It supports Minecraft Bedrock 1.26+ (Windows/Android/iOS).
+**Newb Perfection** is a RenderDragon shader based on [Newb X Legacy](https://github.com/devendrn/newb-x-mcbe). It is an enhanced vanilla shader that focuses on being lightweight and having soft aesthetics. It supports Minecraft Bedrock 1.26+ (Windows/Android/iOS).
 
 <br>
 
