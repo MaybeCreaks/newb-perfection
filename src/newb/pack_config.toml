@@ -6,22 +6,31 @@ description = "The Perfect Newb Shader."
 min_engine_version = [1, 26, 50]
 uuid = "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d"
 
-[[subpack]]
-name = "default"
-folder = "no_glowing_ores"
-defines = ["DEFAULT"]
 
 [[subpack]]
-name = "no glowing ores"
-folder = "no_glowing_ores"
-defines = ["NL_GLOW_ORES 0"]
+define = ""
+materials = ["RenderChunk"]
+description = '''
+default
+'''
 
 [[subpack]]
-name = "no glowing ores - no wave"
-folder = "no_glowing_ores_no_wave"
-defines = ["NL_GLOW_ORES 0", "NL_PLANT_WAVE 0"]
+define = "NO_GLOWING_ORES"
+materials = ["RenderChunk"]
+description = '''
+no glowing ores
+'''
 
 [[subpack]]
-name = "no wave"
-folder = "no_wave"
-defines = ["NL_PLANT_WAVE 0"]
+define = "NO_GLOWING_ORES_NO_WAVE"
+materials = ["RenderChunk"]
+description = '''
+no glowing ores - no wave
+'''
+
+[[subpack]]
+define = "NO_WAVE"
+materials = ["RenderChunk"]
+description = '''
+no wave
+'''
