@@ -5,7 +5,7 @@
 #define PI_HALF 1.570796
 #define PI_QUART 0.785398
 
-#include "/src/newb/config.h"
+#include "newb/config.h"
 
 mat2 rmat2(float t) {
   float sint = sin(t);
