@@ -90,6 +90,13 @@ nl_skycolor nlOverworldSkyColors(nl_environment env) {
   return s;
 }
 
+nl_skycolor nlSkyColors(nl_environment env) {
+  if (env.end) {
+    return nlEndSkyColors(env);
+  }
+  return nlOverworldSkyColors(env);
+}
+
 vec3 nlSkyGradient(nl_skycolor skycol, vec3 viewDir) {
   float h = max(viewDir.y, 0.0);
   float e = 1.0 - abs(viewDir.y);
@@ -98,7 +105,7 @@ vec3 nlSkyGradient(nl_skycolor skycol, vec3 viewDir) {
   return mix(col, skycol.horizonEdge, e * 0.5);
 }
 
-vec4 nlRenderSky(nl_skycolor skycol, vec3 viewDir, float dayFactor, float rainFactor, highp float t) {
+vec4 nlRenderSky(nl_skycolor skycol, nl_environment env, vec3 viewDir, float t, bool renderSky) {
   vec3 skyColor = nlSkyGradient(skycol, viewDir);
   return vec4(skyColor, 1.0);
 }
