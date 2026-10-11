@@ -3,9 +3,16 @@
 
 #include "sky.h"
 
+#ifndef NL_GLOW_TEX
+  #define NL_GLOW_TEX 1.0
+#endif
+#ifndef NL_GLOW_SHIMMER_SPEED
+  #define NL_GLOW_SHIMMER_SPEED 1.0
+#endif
+
 vec3 glowDetect(vec4 diffuse) {
   if (diffuse.a > 0.988 && diffuse.a < 0.993) {
-    vec3 glow = pow(diffuse.rgb, vec3(0.8)) * 2.2;
+    vec3 glow = pow(diffuse.rgb, vec3_splat(0.8)) * 2.2;
     if (diffuse.a > 0.989) {
       return 0.6 * glow;
     }
@@ -25,6 +32,7 @@ vec3 glowDetectD(sampler2D tex, vec2 uv, vec2 offset, vec2 st) {
 
 vec3 nlGlow(sampler2D tex, vec2 uv, float shimmer) {
   vec3 glow = glowDetectC(tex, uv);
+
   #ifdef NL_GLOW_LEAK
     vec2 texSize = vec2(textureSize(tex, 0));
     vec2 offset = 1.0 / texSize;
@@ -33,14 +41,14 @@ vec3 nlGlow(sampler2D tex, vec2 uv, float shimmer) {
     vec2 st = boundSize * fract(64.0 * uv * (texSize / texSize.x)) - 0.5 * boundSize;
     st = sign(st) * step(vec2_splat(0.5 * boundSize - 1.01), abs(st));
 
-    vec3 c1 = glowDetectD(tex, uv, offset * vec2(-1, -1), st);
-    vec3 c2 = glowDetectD(tex, uv, offset * vec2(-1, 0), st);
-    vec3 c3 = glowDetectD(tex, uv, offset * vec2(-1, 1), st);
-    vec3 c4 = glowDetectD(tex, uv, offset * vec2(0, 1), st);
-    vec3 c5 = glowDetectD(tex, uv, offset * vec2(1, 1), st);
-    vec3 c6 = glowDetectD(tex, uv, offset * vec2(1, 0), st);
-    vec3 c7 = glowDetectD(tex, uv, offset * vec2(1, -1), st);
-    vec3 c8 = glowDetectD(tex, uv, offset * vec2(0, -1), st);
+    vec3 c1 = glowDetectD(tex, uv, offset * vec2(-1.0, -1.0), st);
+    vec3 c2 = glowDetectD(tex, uv, offset * vec2(-1.0, 0.0), st);
+    vec3 c3 = glowDetectD(tex, uv, offset * vec2(-1.0, 1.0), st);
+    vec3 c4 = glowDetectD(tex, uv, offset * vec2(0.0, 1.0), st);
+    vec3 c5 = glowDetectD(tex, uv, offset * vec2(1.0, 1.0), st);
+    vec3 c6 = glowDetectD(tex, uv, offset * vec2(1.0, 0.0), st);
+    vec3 c7 = glowDetectD(tex, uv, offset * vec2(1.0, -1.0), st);
+    vec3 c8 = glowDetectD(tex, uv, offset * vec2(0.0, -1.0), st);
 
     vec2 p = uv * texSize;
     vec2 u = fract(p);
