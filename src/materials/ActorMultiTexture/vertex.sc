@@ -49,7 +49,7 @@ void main() {
     viewDir.y = -viewDir.y;
 
     vec4 fogColor;
-    fogColor.rgb = nlRenderSky(skycol, env, viewDir, ViewPositionAndTime.w, false);
+    fogColor.rgb = nlRenderSky(skycol, env, viewDir, ViewPositionAndTime.w, false).rgb;
     fogColor.a = nlRenderFogFade(relativeDist, FogColor.rgb, FogControl.xy);
 
     if (env.nether) {
