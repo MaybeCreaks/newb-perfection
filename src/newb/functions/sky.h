@@ -111,3 +111,22 @@ vec4 nlRenderSky(nl_skycolor skycol, nl_environment env, vec3 viewDir, float t, 
 }
 
 #endif
+
+
+#ifndef NL_END_SKY_FUNCS
+#define NL_END_SKY_FUNCS
+
+vec3 getEndHorizonCol() {
+return NL_END_SKY_BOTTOM;
+}
+
+vec3 getEndZenithCol() {
+return NL_END_SKY_TOP;
+}
+
+vec3 nlRenderEndSky(vec3 horizon, vec3 zenith, vec3 viewDir, float t) {
+float h = clamp(1.0 - abs(viewDir.y), 0.0, 1.0);
+return mix(zenith, horizon, pow(h, 2.0));
+}
+
+#endif
