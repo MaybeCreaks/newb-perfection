@@ -130,3 +130,11 @@ vec4 nlRefl(vec3 viewDir, vec3 normal, float t) {
 return vec4(0.0, 0.0, 0.0, 1.0);
 }
 #endif
+
+
+#ifndef NL_REFL_12_DEFINED
+#define NL_REFL_12_DEFINED
+vec4 nlRefl(vec4 col, nl_skycolor skycol, nl_environment env, vec3 viewDir, vec3 wPos, vec3 cPos, vec3 gPos, vec3 normal, vec2 light, float t, float camDis, float relativeDist) {
+return col;
+}
+#endif
