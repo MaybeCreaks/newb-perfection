@@ -1,5 +1,5 @@
 name = "Newb Perfection"
-author = "MaybeCreaks, devendrn"
+authors = ["MaybeCreaks", "devendrn"]
 version = [1, 0, 0]
 description = "The Perfect Newb Shader. %V"
 min_engine_version = [1, 26, 40]
