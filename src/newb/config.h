@@ -205,3 +205,17 @@
 #endif
 
 #endif
+
+
+#ifndef NL_SUN_SIZE
+#define NL_SUN_SIZE 1.0
+#endif
+#ifndef NL_SUN_TILT
+#define NL_SUN_TILT 0.0
+#endif
+#ifndef NL_MOON_SIZE
+#define NL_MOON_SIZE 1.0
+#endif
+#ifndef NL_MOON_TILT
+#define NL_MOON_TILT 0.0
+#endif
