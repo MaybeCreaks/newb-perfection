@@ -18,6 +18,14 @@ SAMPLER2D_AUTOREG(s_LightMapTexture);
 
 
 uniform vec4 RenderChunkFogAlpha;
+
+#ifndef NL_WATER_16_INJECTED
+#define NL_WATER_16_INJECTED
+vec4 nlWater(vec4 color, vec3 worldPos, nl_skycolor skycol, nl_environment env, vec4 a_color0, vec3 viewDir, vec3 cPos, vec3 tiledCpos, vec3 gPos, vec3 camPos, vec3 light, vec3 torchColor, vec2 lit, float bPos_y, float camDis, float t) {
+return color;
+}
+#endif
+
 void main() {
   #ifdef INSTANCING
     mat4 model = mtxFromCols(i_data0, i_data1, i_data2, i_data3);
