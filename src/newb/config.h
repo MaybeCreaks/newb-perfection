@@ -190,4 +190,18 @@
   #define NL_PLANT_WAVE 0
 #endif
 
+
+#ifndef NL_CLOUD1_DEPTH
+#define NL_CLOUD1_DEPTH 1.0
+#endif
+#ifndef NL_CLOUD1_OPACITY
+#define NL_CLOUD1_OPACITY 1.0
+#endif
+#ifndef NL_CLOUD1_SPEED
+#define NL_CLOUD1_SPEED 1.0
+#endif
+#ifndef NL_CLOUD1_SCALE
+#define NL_CLOUD1_SCALE 1.0
+#endif
+
 #endif
