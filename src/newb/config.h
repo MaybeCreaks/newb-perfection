@@ -219,3 +219,11 @@
 #ifndef NL_MOON_TILT
 #define NL_MOON_TILT 0.0
 #endif
+
+
+#ifndef NL_WEATHER_PARTICLE_SIZE
+#define NL_WEATHER_PARTICLE_SIZE 1.0
+#endif
+#ifndef NL_WEATHER_RAIN_SLANT
+#define NL_WEATHER_RAIN_SLANT 1.0
+#endif
