@@ -1,11 +1,11 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include "newb/config.h"
+
 #define PI 3.141592
 #define PI_HALF 1.570796
 #define PI_QUART 0.785398
-
-#include "newb/config.h"
 
 mat2 rmat2(float t) {
   float sint = sin(t);
