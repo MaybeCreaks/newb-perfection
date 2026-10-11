@@ -7,7 +7,6 @@ $output v_color0, v_color1, v_fog, v_refl, v_texcoord0, v_lightmapUV, v_extra
 #include <bgfx_shader.sh>
 #include <newb/main.sh>
 
-worldPos.y -= 1.0 * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x;
 uniform vec4 FogAndDistanceControl;
 uniform vec4 ViewPositionAndTime;
 uniform vec4 FogColor;
@@ -17,6 +16,8 @@ uniform vec4 CameraPosition;
 SAMPLER2D_AUTOREG(s_MatTexture);
 SAMPLER2D_AUTOREG(s_LightMapTexture);
 
+
+uniform vec4 RenderChunkFogAlpha;
 void main() {
   #ifdef INSTANCING
     mat4 model = mtxFromCols(i_data0, i_data1, i_data2, i_data3);
@@ -25,11 +26,11 @@ void main() {
   #endif
 
   vec3 worldPos = mul(model, vec4(a_position, 1.0)).xyz;
+  worldPos.y -= 1.0 * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x;
 
   #if !(defined(DEPTH_ONLY_OPAQUE) || defined(DEPTH_ONLY) || defined(INSTANCING))
 
   #ifdef NL_CHUNK_LOAD_ANIM
-worldPos.y -= 1.0 * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x;
   #endif
 
   #ifdef RENDER_AS_BILLBOARDS
@@ -112,7 +113,6 @@ worldPos.y -= 1.0 * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x * RenderChunkF
   #endif
 
   // loading chunks
-worldPos.y -= 1.0 * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x;
 
   vec4 fogColor;
   fogColor.rgb = nlRenderSky(skycol, env, viewDir, t, true).rgb;
@@ -173,13 +173,11 @@ worldPos.y -= 1.0 * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x * RenderChunkF
     if (isc && isb && (uv1.x > 0.81 && uv1.x < 0.876) && uv0.y > 0.5) {
       vec4 lava = nlLavaNoise(gPos, t);
       #ifdef NL_LAVA_NOISE_BUMP
-        worldPos.y += NL_LAVA_NOISE_BUMP*lava.a;
       #endif
       color.rgb *= lava.rgb;
     }
   #endif
 
-  v_extra = vec4(shade, worldPos.y, water, shimmer);
   v_refl = refl;
   v_texcoord0 = uv0;
   v_lightmapUV = uv1;
