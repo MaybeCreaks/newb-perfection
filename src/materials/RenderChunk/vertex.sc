@@ -7,7 +7,7 @@ $output v_color0, v_color1, v_fog, v_refl, v_texcoord0, v_lightmapUV, v_extra
 #include <bgfx_shader.sh>
 #include <newb/main.sh>
 
-uniform vec4 RenderChunkFogAlpha;
+worldPos.y -= 1.0 * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x;
 uniform vec4 FogAndDistanceControl;
 uniform vec4 ViewPositionAndTime;
 uniform vec4 FogColor;
@@ -29,7 +29,7 @@ void main() {
   #if !(defined(DEPTH_ONLY_OPAQUE) || defined(DEPTH_ONLY) || defined(INSTANCING))
 
   #ifdef NL_CHUNK_LOAD_ANIM
-    worldPos.y -= float(NL_CHUNK_LOAD_ANIM) * RenderChunkFogAlpha.float(x) * RenderChunkFogAlpha.float(x) * RenderChunkFogAlpha.x;
+worldPos.y -= 1.0 * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x;
   #endif
 
   #ifdef RENDER_AS_BILLBOARDS
@@ -112,7 +112,7 @@ void main() {
   #endif
 
   // loading chunks
-  relativeDist += RenderChunkFogAlpha.x;
+worldPos.y -= 1.0 * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x * RenderChunkFogAlpha.x;
 
   vec4 fogColor;
   fogColor.rgb = nlRenderSky(skycol, env, viewDir, t, true).rgb;
