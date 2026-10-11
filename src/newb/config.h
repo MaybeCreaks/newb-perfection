@@ -1,3 +1,6 @@
+#ifndef NEWB_PERFECTION_CONFIG_H
+#define NEWB_PERFECTION_CONFIG_H
+
 #define NL_FOG_TYPE 0
 #define NL_FOG_START 0.65
 #define NL_FOG_END 0.98
