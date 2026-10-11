@@ -5,7 +5,7 @@
 #define NL_FOG_START 0.65
 #define NL_FOG_END 0.98
 #define NL_MIST_DENSITY 0.0
-#define NL_CHUNK_LOAD_ANIM 1
+#define NL_CHUNK_LOAD_ANIM 1.0
 
 #define NL_DAY_SKY_TOP     vec3(0.12, 0.42, 0.88)
 #define NL_DAY_SKY_BOTTOM  vec3(0.55, 0.72, 0.95)

@@ -29,7 +29,7 @@ void main() {
   #if !(defined(DEPTH_ONLY_OPAQUE) || defined(DEPTH_ONLY) || defined(INSTANCING))
 
   #ifdef NL_CHUNK_LOAD_ANIM
-    worldPos.y -= NL_CHUNK_LOAD_ANIM*RenderChunkFogAlpha.x*RenderChunkFogAlpha.x*RenderChunkFogAlpha.x;
+    worldPos.y -= float(NL_CHUNK_LOAD_ANIM) * RenderChunkFogAlpha.float(x) * RenderChunkFogAlpha.float(x) * RenderChunkFogAlpha.x;
   #endif
 
   #ifdef RENDER_AS_BILLBOARDS
