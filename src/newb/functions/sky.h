@@ -119,3 +119,14 @@ float h = clamp(1.0 - abs(viewDir.y), 0.0, 1.0);
 return mix(zenith, horizon, pow(h, 2.0));
 }
 #endif
+
+
+#ifndef NL_REFL_DEFINED
+#define NL_REFL_DEFINED
+vec4 nlRefl(nl_skycolor skycol, nl_environment env, vec3 viewDir, float t) {
+return vec4(skycol.zenith, 1.0);
+}
+vec4 nlRefl(vec3 viewDir, vec3 normal, float t) {
+return vec4(0.0, 0.0, 0.0, 1.0);
+}
+#endif
