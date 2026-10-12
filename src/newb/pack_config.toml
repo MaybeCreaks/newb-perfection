@@ -1,10 +1,27 @@
 name = "Newb Perfection"
 authors = ["MaybeCreaks", "devendrn"]
-version = "1.0.0"
-url = "https://youtube.com/@MaybeCreaks"
+version = [1, 0, 0]
+url = "https://github.com/MaybeCreaks/newb-perfection"
 description = "The Perfect Newb Shader. %V"
 min_supported_mc_version = [1, 26, 40]
 uuid = "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d"
+
+materials = [
+"Actor",
+"ActorGlint",
+"ActorMultiTexture",
+"Clouds",
+"EndSky",
+"ItemInHandColor",
+"ItemInHandColorGlint",
+"ItemInHandTextured",
+"RenderChunk",
+"Sky",
+"Stars",
+"SunMoon",
+"Weather"
+]
+
 
 
 [[subpack]]
