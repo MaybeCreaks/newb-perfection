@@ -1,6 +1,6 @@
 name = "Newb Perfection"
 authors = ["MaybeCreaks"]
-version = [1, 0]
+version = [0, 1, 0]
 url = "https://github.com/MaybeCreaks/newb-perfection"
 description = "The Perfect Newb Shader."
 min_supported_mc_version = [1, 26, 40]
