@@ -1,5 +1,7 @@
 name = "Newb Perfection"
 authors = ["MaybeCreaks"]
+copyright = "devendrn"
+credits = "Newb Developers"
 version = [0, 1, 0]
 url = "https://github.com/MaybeCreaks/newb-perfection"
 description = "The Perfect Newb Shader."
@@ -24,8 +26,10 @@ materials = [
 
 [info]
 name = "Newb Perfection"
-authors = ["MaybeCreaks", "devendrn"]
-version = [1, 0, 0]
+authors = ["MaybeCreaks"]
+copyright = "devendrn"
+credits = "Newb Developers"
+version = [0, 1, 0]
 url = "https://github.com/MaybeCreaks/newb-perfection"
 description = "The Perfect Newb Shader."
 min_supported_mc_version = [1, 26, 40]
