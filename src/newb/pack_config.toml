@@ -1,9 +1,10 @@
 name = "Newb Perfection"
-authors = "MaybeCreaks, devendrn"
-version = "1.0.0"
+authors = ["MaybeCreaks"]
+version = [1, 0]
 url = "https://github.com/MaybeCreaks/newb-perfection"
 description = "The Perfect Newb Shader."
-min_engine_version = [1, 26, 40]
+min_supported_mc_version = [1, 26, 40]
+uuid = "428fba28-b4f3-40a4-8c22-33388dbcee2f"
 
 materials = [
   "Actor",
@@ -23,24 +24,32 @@ materials = [
 
 [[subpack]]
 name = "Default"
-define = ""
+define = "DEFAULT"
 materials = ["RenderChunk"]
-description = "default"
+description = '''
+default
+'''
 
 [[subpack]]
 name = "No Glowing Ores"
 define = "NO_GLOWING_ORES"
 materials = ["RenderChunk"]
-description = "no glowing ores"
-
-[[subpack]]
-name = "No Glowing Ores - No Wave"
-define = "NO_GLOWING_ORES_NO_WAVE"
-materials = ["RenderChunk"]
-description = "no glowing ores - no wave"
+description = '''
+no glowing ores
+'''
 
 [[subpack]]
 name = "No Wave"
 define = "NO_WAVE"
 materials = ["RenderChunk"]
-description = "no wave"
+description = '''
+no wave
+'''
+
+[[subpack]]
+name = "No Glowing Ores and Wave"
+define = "NO_GLOWING_ORES NO_WAVE"
+materials = ["RenderChunk"]
+description = '''
+no glowing ores and no wave
+'''
