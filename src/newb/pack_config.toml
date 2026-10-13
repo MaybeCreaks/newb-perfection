@@ -22,6 +22,15 @@ materials = [
   "Weather"
 ]
 
+[info]
+name = "Newb Perfection"
+authors = ["MaybeCreaks", "devendrn"]
+version = [1, 0, 0]
+url = "https://github.com/MaybeCreaks/newb-perfection"
+description = "The Perfect Newb Shader."
+min_supported_mc_version = [1, 26, 40]
+uuid = "428fba28-b4f3-40a4-8c22-33388dbcee2f"
+
 [[subpack]]
 name = "Default"
 define = "DEFAULT"
